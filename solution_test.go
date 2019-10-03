@@ -4,11 +4,13 @@ import "testing"
 
 func doTestCase(t *testing.T, name string, winnings int, allInCount int, expected int) {
 	rounds := solution(winnings, allInCount)
+	logFunc := t.Errorf
+	status := "FAILED"
 	if rounds == expected {
-		t.Logf("[%v] SUCCESS: N=%v/K=%v => expected: %v, got: %v\n", name, winnings, allInCount, expected, rounds)
-	} else {
-		t.Errorf("[%v] FAILED: N=%v/K=%v => expected: %v, got: %v\n", name, winnings, allInCount, expected, rounds)
+		logFunc = t.Logf
+		status = "SUCCESS"
 	}
+	logFunc("[%v] %v: N=%v/K=%v => expected: %v, got: %v\n", name, status, winnings, allInCount, expected, rounds)
 }
 
 func Test8_0(t *testing.T) {
